@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>로스트아크 획드량</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>로스트아크 주간 골드 획득량</h1>
+<div style="text-align:center; margin-bottom:20px;">
+
+    <button onclick="generate(3)">일반</button>
+    <button onclick="generate(4)">고급</button>
+    <button onclick="generate(5)">희귀</button>
+    <button onclick="generate(6)">영웅</button>
+    <button onclick="generate(7)">전설</button>
+
+    <button onclick="generateGangha()">
+    강하+1
+    </button>
+
+    <div
+    style="
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-top:15px;
+">
+
+    <div
+    id="directionResult"
+    style="
+    font-size:30px;
+    font-weight:bold;
+    ">
+    -
+    </div>
+
+    <div
+    id="ganghaBox"
+    style="
+    display:none; 
+    font-size:20px;
+    font-weight:bold;
+    ">
+        강하+1 결과 :
+        <span id="ganghaResult"></span>
+    </div>
+
+</div>
+
+</div>
+<div class="search-box">
+
+<input
+type="password"
+id="apiKey"
+placeholder="로스트아크 API 키">
+
+<input
+type="text"
+id="characterName"
+placeholder="대표 캐릭터명">
+
+<button onclick="searchCharacter()">
+조회
+</button>
+
+<button onclick="offlineMode()">
+오프라인 모드
+</button>
+
+<button onclick="clearOfflineData()">
+오프라인 초기화
+</button>
+
+</div>
+<div id="offlineBox" style="display:none; margin-bottom:20px;">
+
+<input
+type="number"
+id="characterCount"
+min="1"
+max="30"
+placeholder="캐릭터 수 (최대 30)">
+
+<button onclick="createOfflineCharacters()">
+생성
+</button>
+
+</div>
+
+
+</div>
+<div id="status">
+API 키를 입력하고 캐릭터를 조회하세요.
+</div>
+
+<div
+id="offlineLevelBox"
+style="
+display:none;
+background:white;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+">
+</div>
+
+<div
+id="grandTotal"
+class="total-box">
+
+총 골드 : 0 골드
+
+<br><br>
+
+귀속 골드 : 0 골드
+
+<br><br>
+
+거래가능 골드 : 0 골드
+
+</div>
+<div
+id="characterGrid"
+class="character-grid">
+</div>
+
+
+
+<script src="script.js"></script>
+
+<div id="raidModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>레이드 변경</h2>
+
+        <div id="modalRaidList"></div>
+
+        <br>
+
+        <button onclick="saveRaidSelection()">
+            저장
+        </button>
+
+        <button onclick="closeRaidModal()">
+            닫기
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>
