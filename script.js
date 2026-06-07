@@ -151,6 +151,47 @@ const raidRequirements = {
 
 };
 
+const raidGroups = {
+
+    "성당":[
+        "성당(1단계)",
+        "성당(2단계)",
+        "성당(3단계)"
+    ],
+
+    "세르카":[
+        "세르카(노말)",
+        "세르카(하드)",
+        "세르카(나이트메어)"
+    ],
+
+    "종막":[
+        "종막(노말)",
+        "종막(하드)"
+    ],
+
+    "4막":[
+        "4막(노말)",
+        "4막(하드)"
+    ],
+
+    "3막":[
+        "3막(노말)",
+        "3막(하드)"
+    ],
+
+    "2막":[
+        "2막(노말)",
+        "2막(하드)"
+    ],
+
+    "1막":[
+        "1막(노말)",
+        "1막(하드)"
+    ]
+
+};
+
 const fullBoundRaids = [
 
 "성당(3단계)",
@@ -391,13 +432,48 @@ availableRaids.sort(
     (a,b) => b.gold - a.gold
 );
 
-// 상위 3개 자동 체크
-const autoCheckedRaids =
-isGoldCharacter
-? availableRaids
-    .slice(0,3)
-    .map(r => r.name)
-: [];
+const selectedGroups = [];
+const autoCheckedRaids = [];
+
+if(isGoldCharacter){
+
+    availableRaids.forEach(raid => {
+
+        let groupName = raid.name;
+
+        for(let group in raidGroups){
+
+            if(
+                raidGroups[group]
+                .includes(raid.name)
+            ){
+                groupName = group;
+                break;
+            }
+
+        }
+
+        if(
+    !selectedGroups.includes(
+        groupName
+    )
+    &&
+    autoCheckedRaids.length < 3
+){
+
+    selectedGroups.push(
+        groupName
+    );
+
+    autoCheckedRaids.push(
+        raid.name
+    );
+
+}
+
+    });
+
+}
 
 for(let raid in prices){
 
